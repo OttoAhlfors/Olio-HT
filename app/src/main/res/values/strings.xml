@@ -1,0 +1,6 @@
+<resources>
+    <string name="app_name">HT</string>
+    <string name="title_current">Currently on</string>
+    <string name="title_rated">Rated movies</string>
+    <string name="title_settings">Settings</string>
+</resources>
