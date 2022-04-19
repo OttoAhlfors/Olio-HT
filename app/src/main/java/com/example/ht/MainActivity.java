@@ -3,6 +3,9 @@ package com.example.ht;
 import android.os.Bundle;
 import android.os.StrictMode;
 import android.view.View;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
+import android.widget.TextView;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
@@ -21,6 +24,7 @@ import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -29,6 +33,8 @@ import javax.xml.parsers.ParserConfigurationException;
 public class MainActivity extends AppCompatActivity {
 
     private ActivityMainBinding binding;
+    ListView movieField;
+    ArrayList<String> movieList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,6 +55,9 @@ public class MainActivity extends AppCompatActivity {
 
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
         StrictMode.setThreadPolicy(policy);
+
+        movieField = (ListView)findViewById(R.id.listView);
+        movieList=new ArrayList<>();
     }
 
     public void readXML (View v) {
@@ -59,13 +68,13 @@ public class MainActivity extends AppCompatActivity {
             e.printStackTrace();
         }
 
-        String urlString = "https://www.finnkino.fi/xml/Schedule/";
+        String urlString = "https://www.finnkino.fi/xml/Events/";
         try {
             Document doc = builder.parse(urlString);
             doc.getDocumentElement().normalize();
             //System.out.print("Root element: " + doc.getDocumentElement().getNodeName());
 
-            NodeList nlist = doc.getDocumentElement().getElementsByTagName("Show");
+            NodeList nlist = doc.getDocumentElement().getElementsByTagName("Event");
 
             for (int i = 0; i < nlist.getLength(); i++) {
 
@@ -78,7 +87,8 @@ public class MainActivity extends AppCompatActivity {
 
                         Element element = (Element) node;
 
-                        System.out.println("Movie name: " + element.getElementsByTagName("Title").item(0).getTextContent());
+                        //System.out.println("Movie name: " + element.getElementsByTagName("Title").item(0).getTextContent());
+                        movieList.add("Movie name: " + element.getElementsByTagName("Title").item(0).getTextContent());
 
                     }
                 } catch (NullPointerException e) {
@@ -91,6 +101,8 @@ public class MainActivity extends AppCompatActivity {
         } catch (SAXException e) {
             e.printStackTrace();
         } finally {
+            ArrayAdapter arrayAdapter=new ArrayAdapter(this,android.R.layout.simple_list_item_1,movieList);
+            movieField.setAdapter(arrayAdapter);
             System.out.println("\nValmis");
         }
     }
