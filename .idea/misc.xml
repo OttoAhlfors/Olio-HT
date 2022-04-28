@@ -6,10 +6,14 @@
         <entry key="..\:/Koulu/Olio/HT/app/src/main/res/layout/activity_main.xml" value="0.21240942028985507" />
         <entry key="..\:/Koulu/Olio/HT/app/src/main/res/layout/fragment_home.xml" value="0.21240942028985507" />
         <entry key="..\:/Koulu/Olio/HT/app/src/main/res/menu/bottom_nav_menu.xml" value="0.18541666666666667" />
+        <entry key="..\:/Users/elias/OneDrive/Asiakirjat/GitHub/Olio-HT/app/src/main/res/layout/activity_main.xml" value="0.484375" />
+        <entry key="..\:/Users/elias/OneDrive/Asiakirjat/GitHub/Olio-HT/app/src/main/res/layout/fragment_dashboard.xml" value="0.5541666666666667" />
+        <entry key="..\:/Users/elias/OneDrive/Asiakirjat/GitHub/Olio-HT/app/src/main/res/layout/fragment_home.xml" value="0.5" />
+        <entry key="..\:/Users/elias/OneDrive/Asiakirjat/GitHub/Olio-HT/app/src/main/res/layout/fragment_notifications.xml" value="0.5541666666666667" />
       </map>
     </option>
   </component>
-  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="1.8" project-jdk-type="JavaSDK">
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" project-jdk-name="1.8" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/build/classes" />
   </component>
   <component name="ProjectType">
