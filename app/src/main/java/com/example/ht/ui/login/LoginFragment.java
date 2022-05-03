@@ -124,8 +124,23 @@ public class LoginFragment extends Fragment {
                 User user = new User(usernameEditText.getText().toString(), passwordEditText.getText().toString());
                 if (!user.logCheck(usernameEditText.getText().toString())) {
                     user.addUser(user);
+                    String welcome = "Account created";
+                    if (getContext() != null && getContext().getApplicationContext() != null) {
+                        Toast.makeText(getContext().getApplicationContext(), welcome, Toast.LENGTH_LONG).show();
+                    }
                 } else {
-                    user.passwordCheck(usernameEditText.getText().toString(), passwordEditText.getText().toString());
+                    if (user.passwordCheck(usernameEditText.getText().toString(), passwordEditText.getText().toString())) {
+                        System.out.println("toimii");
+                        String welcome = "Login successful";
+                        if (getContext() != null && getContext().getApplicationContext() != null) {
+                            Toast.makeText(getContext().getApplicationContext(), welcome, Toast.LENGTH_LONG).show();
+                        }
+                    } else {
+                        String welcome = "Incorrect credentials";
+                        if (getContext() != null && getContext().getApplicationContext() != null) {
+                            Toast.makeText(getContext().getApplicationContext(), welcome, Toast.LENGTH_LONG).show();
+                        }
+                    }
                 }
             }
         });

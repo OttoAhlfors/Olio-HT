@@ -21,14 +21,7 @@ class User {
 
     public static void addUser(User user) {
         UserList.add(user);
-    }
-
-    public static String uName(int i) {
-        return UserList.get(i).username;
-    }
-
-    public static String uPassword(int i) {
-        return UserList.get(i).password;
+        System.out.println(UserList.size());
     }
 
     public static boolean logCheck(String username) {
@@ -46,7 +39,7 @@ class User {
                 if (UserList.get(i).password.equals(password)) {
                     return true;
                 } else {
-                    return true;
+                    return false;
                 }
             }
         }
