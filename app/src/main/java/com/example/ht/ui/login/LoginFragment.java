@@ -52,7 +52,6 @@ public class LoginFragment extends Fragment {
         final EditText usernameEditText = binding.username;
         final EditText passwordEditText = binding.password;
         final Button loginButton = binding.login;
-        final Button registerButton = binding.btnRegister;
         final ProgressBar loadingProgressBar = binding.loading;
 
         loginViewModel.getLoginFormState().observe(getViewLifecycleOwner(), new Observer<LoginFormState>() {
@@ -122,10 +121,11 @@ public class LoginFragment extends Fragment {
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (usernameEditText.getText().toString().equals("admin") && passwordEditText.getText().toString().equals("admin1ADMIN!")) {
-                    loadingProgressBar.setVisibility(View.VISIBLE);
-                    loginViewModel.login(usernameEditText.getText().toString(),
-                            passwordEditText.getText().toString());
+                User user = new User(usernameEditText.getText().toString(), passwordEditText.getText().toString());
+                if (!user.logCheck(usernameEditText.getText().toString())) {
+                    user.addUser(user);
+                } else {
+                    user.passwordCheck(usernameEditText.getText().toString(), passwordEditText.getText().toString());
                 }
             }
         });
