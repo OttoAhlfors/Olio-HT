@@ -45,7 +45,7 @@ public class NotificationsFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 for (int i = 0; i < names.size(); i++) {
-                    listAdapter.add(names.get(i));
+                    listAdapter.add(names.get(i) + "\t\t" + stars.get(i) + "/5");
                 }
                 listAdapter.notifyDataSetChanged();
             }
