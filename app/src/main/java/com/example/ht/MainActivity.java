@@ -1,18 +1,16 @@
 package com.example.ht;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.StrictMode;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
-import android.widget.TextView;
 
+import com.example.ht.ui.notifications.NotificationsFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
@@ -38,6 +36,11 @@ public class MainActivity extends AppCompatActivity {
     private ActivityMainBinding binding;
     ListView movieField;
     ArrayList<String> movieList;
+    ListView ratingsField;
+    ArrayList<String> ratingsList;
+
+    ArrayList names;
+    ArrayList stars;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,6 +64,22 @@ public class MainActivity extends AppCompatActivity {
 
         movieField = (ListView)findViewById(R.id.listView);
         movieList=new ArrayList<>();
+        ratingsField = (ListView)findViewById(R.id.listRatings);
+        ratingsList=new ArrayList<>();
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        names = getIntent().getParcelableArrayListExtra("names");
+        stars = getIntent().getParcelableArrayListExtra("stars");
+    }
+
+    public void sendToFragment(ArrayList names, ArrayList stars) {
+        Intent intent = new Intent(getApplicationContext(), NotificationsFragment.class);
+        intent.putExtra("names", names);
+        intent.putExtra("stars", stars);
+        startActivity(intent);
     }
 
     public void readXML (View v) {
@@ -109,5 +128,4 @@ public class MainActivity extends AppCompatActivity {
             System.out.println("\nValmis");
         }
     }
-
 }

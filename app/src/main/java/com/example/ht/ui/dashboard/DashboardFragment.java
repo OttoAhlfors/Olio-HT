@@ -1,5 +1,6 @@
 package com.example.ht.ui.dashboard;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,27 +15,12 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
+import com.example.ht.MainActivity;
 import com.example.ht.databinding.FragmentDashboardBinding;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
-
-class Movie {
-    public static List<Movie> MovieList = new ArrayList<Movie>();
-
-    public String name;
-    public int stars;
-
-    public Movie(String name, int stars) {
-        this.name = name;
-        this.stars = stars;
-    }
-
-    public static void addMovie(Movie movie) {
-        MovieList.add(movie);
-        System.out.println(MovieList.size());
-    }
-}
 
 public class DashboardFragment extends Fragment {
 
@@ -52,11 +38,15 @@ public class DashboardFragment extends Fragment {
         final Button rate = binding.rate;
         final EditText movieName = binding.movieName;
 
+        ArrayList<String> nameList = new ArrayList<String>();
+        ArrayList<String> starList = new ArrayList<String>();
+
         rate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Movie movie = new Movie(movieName.getText().toString(), rateStars.getNumStars());
-                movie.addMovie(movie);
+                nameList.add(movieName.getText().toString());
+                starList.add(String.valueOf(rateStars.getRating()));
+                sendToActivity(nameList, starList);
             }
         });
 
@@ -67,5 +57,12 @@ public class DashboardFragment extends Fragment {
     public void onDestroyView() {
         super.onDestroyView();
         binding = null;
+    }
+
+    public void sendToActivity(ArrayList names, ArrayList stars) {
+        Intent intent = new Intent(getActivity().getBaseContext(), MainActivity.class);
+        intent.putExtra("names", names);
+        intent.putExtra("stars", stars);
+        startActivity(intent);
     }
 }
